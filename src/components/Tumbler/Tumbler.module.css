@@ -22,10 +22,12 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  box-sizing: border-box;
   border-radius: var(--radius-sm);
   background: var(--interaction-secondary-bg);
   position: relative;
   transition: background-color 0.2s ease;
+  overflow: visible;
 }
 
 .size-M {
@@ -65,7 +67,7 @@
   display: block;
   border-radius: 50%;
   background: var(--bg-default);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease;
   position: relative;
   z-index: 1;
