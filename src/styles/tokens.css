@@ -63,25 +63,29 @@
   --bg-base: #f5f5f7;
   --bg-elevated: #ffffff;
   --bg-floating: #ffffff;
-  --bg-border: #e0e0e8;
+  --bg-border: #ecedf2;
+  --bg-border-hover: #dcdce0;
   --bg-fade: rgba(15, 15, 21, 0.5);
 
   /* -----------------------------------------------------------------------
      Colors — Interaction
      ----------------------------------------------------------------------- */
-  --interaction-primary-bg: #221327;
+  --interaction-primary-bg: #0f0f15;
   --interaction-primary-bg-hover: #3c3c4a;
+  --interaction-primary-content: #ffffff;
   --interaction-primary-content-hover: #ecedf2;
   --interaction-secondary-bg: #ecedf2;
   --interaction-secondary-bg-hover: #f5f5f8;
   --interaction-secondary-content: #0f0f15;
   --interaction-secondary-content-hover: #6e6e81;
   --interaction-ghost-bg-hover: rgba(15, 15, 21, 0.06);
+  --interaction-disable-bg: #ecedf2;
+  --interaction-disable-content: #b3b3c3;
 
   /* -----------------------------------------------------------------------
      Colors — Accent
      ----------------------------------------------------------------------- */
-  --accent-alert: #ff4d5a;
+  --accent-alert: #f93643;
   --accent-link: #4d7cff;
 
   /* -----------------------------------------------------------------------

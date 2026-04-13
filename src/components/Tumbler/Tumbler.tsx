@@ -1,31 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Radio.module.css';
+import styles from './Tumbler.module.css';
 
-export type RadioSize = 'M' | 'S';
+export type TumblerSize = 'M' | 'S';
 
-export interface RadioProps {
-  /** Selected state */
+export interface TumblerProps {
+  /** On/off state */
   checked?: boolean;
   /** Label text */
   label?: string;
   /** Size */
-  size?: RadioSize;
+  size?: TumblerSize;
   /** Disabled */
   disabled?: boolean;
-  /** Error */
-  error?: boolean;
   /** onChange handler */
   onChange?: (checked: boolean) => void;
   /** Additional class */
   className?: string;
 }
 
-export const Radio: React.FC<RadioProps> = ({
+export const Tumbler: React.FC<TumblerProps> = ({
   checked: checkedProp = false,
   label,
   size = 'M',
   disabled = false,
-  error = false,
   onChange,
   className,
 }) => {
@@ -44,11 +41,10 @@ export const Radio: React.FC<RadioProps> = ({
     onChange?.(next);
   };
 
-  const circleClasses = [
-    styles.circle,
+  const trackClasses = [
+    styles.track,
     styles[`size-${size}`],
     checked ? styles.active : '',
-    error ? styles.error : '',
     disabled ? styles.disabled : '',
   ]
     .filter(Boolean)
@@ -56,13 +52,14 @@ export const Radio: React.FC<RadioProps> = ({
 
   return (
     <label
-      className={`${styles.wrapper} ${disabled ? styles.disabled : ''} ${className ?? ''}`}
+      className={`${styles.wrapper} ${styles[`gap-${size}`]} ${disabled ? styles.wrapperDisabled : ''} ${className ?? ''}`}
       onClick={handleClick}
     >
-      <span className={circleClasses}>
-        <span className={styles.dot} style={{ visibility: checked ? 'visible' : 'hidden' }} />
+      <span className={trackClasses}>
+        <span className={styles.thumb} />
+        {!checked && !disabled && <span className={styles.insetShadow} />}
       </span>
-      {label && <span className={`${styles.label} ${styles[`label-${size}`]}`}>{label}</span>}
+      {label && <span className={`${styles.label} ${styles[`label-${size}`]} ${disabled ? styles.labelDisabled : ''}`}>{label}</span>}
     </label>
   );
 };

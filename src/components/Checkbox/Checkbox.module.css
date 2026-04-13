@@ -7,7 +7,6 @@
 }
 
 .wrapper.disabled {
-  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -17,41 +16,80 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-sizing: border-box;
   border: 1.5px solid var(--bg-border);
-  border-radius: 6px;
-  background: var(--bg-default);
+  background: transparent;
   transition: background-color 0.15s ease, border-color 0.15s ease;
-}
-
-.size-L {
-  width: 24px;
-  height: 24px;
+  overflow: hidden;
 }
 
 .size-M {
   width: 20px;
   height: 20px;
+  border-radius: 6px;
 }
 
+.size-S {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* Hover — unchecked */
+.wrapper:hover .box:not(.active):not(.disabled) {
+  border-color: var(--bg-border-hover);
+}
+
+/* Checked / Indeterminate */
 .box.active {
-  background: var(--interaction-primary-bg);
-  border-color: var(--interaction-primary-bg);
+  background: var(--content-primary);
+  border-color: transparent;
 }
 
+/* Hover — checked */
+.wrapper:hover .box.active:not(.disabled) {
+  background: var(--interaction-primary-bg-hover);
+}
+
+/* Error */
 .box.error {
   border-color: var(--accent-alert);
 }
 
 .box.error.active {
-  background: var(--accent-alert);
+  background: var(--content-primary);
   border-color: var(--accent-alert);
 }
 
+/* Disabled */
+.box.disabled {
+  background: var(--interaction-disable-bg);
+  border-color: transparent;
+}
+
+.box.disabled.error {
+  border-color: var(--accent-alert);
+}
+
+/* ---- Icon ---- */
 .icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--content-pure-inverse);
+  color: var(--interaction-primary-content);
+  line-height: 0;
+}
+
+.icon svg {
+  display: block;
+}
+
+.box.disabled .icon {
+  color: var(--interaction-disable-content);
+}
+
+.wrapper:hover .box.active:not(.disabled) .icon {
+  color: var(--interaction-primary-content-hover);
 }
 
 /* ---- Label ---- */
@@ -61,12 +99,12 @@
   color: var(--content-primary);
 }
 
-.label-L {
+.label-M {
   font-size: var(--font-size-md);
   line-height: var(--font-line-height-sm);
 }
 
-.label-M {
+.label-S {
   font-size: var(--font-size-sm);
   line-height: var(--font-line-height-xs);
 }

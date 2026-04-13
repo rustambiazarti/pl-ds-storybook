@@ -1,0 +1,124 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.gap-M {
+  gap: var(--spacing-12);
+}
+
+.gap-S {
+  gap: var(--spacing-8);
+}
+
+.wrapperDisabled {
+  cursor: not-allowed;
+}
+
+/* ---- Track ---- */
+.track {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--interaction-secondary-bg);
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.size-M {
+  width: 42px;
+  height: 24px;
+  padding: 3px;
+}
+
+.size-S {
+  width: 32px;
+  height: 18px;
+  padding: 2px;
+}
+
+/* Hover — off */
+.wrapper:hover .track:not(.active):not(.disabled) {
+  background: var(--interaction-secondary-bg-hover);
+}
+
+/* On */
+.track.active {
+  background: var(--interaction-primary-bg);
+}
+
+/* Hover — on */
+.wrapper:hover .track.active:not(.disabled) {
+  background: var(--interaction-primary-bg-hover);
+}
+
+/* Disabled */
+.track.disabled {
+  background: var(--interaction-disable-bg);
+}
+
+/* ---- Thumb ---- */
+.thumb {
+  display: block;
+  border-radius: 50%;
+  background: var(--bg-default);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+  transition: transform 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.size-M .thumb {
+  width: 18px;
+  height: 18px;
+}
+
+.size-S .thumb {
+  width: 14px;
+  height: 14px;
+}
+
+.size-M.active .thumb {
+  transform: translateX(18px);
+}
+
+.size-S.active .thumb {
+  transform: translateX(14px);
+}
+
+.track.disabled .thumb {
+  background: var(--interaction-disable-content);
+}
+
+/* ---- Inset shadow (off state only) ---- */
+.insetShadow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.04);
+  pointer-events: none;
+}
+
+/* ---- Label ---- */
+.label {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-primary);
+}
+
+.label-M {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-sm);
+}
+
+.label-S {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+}
+
+.labelDisabled {
+  color: var(--interaction-disable-content);
+}
