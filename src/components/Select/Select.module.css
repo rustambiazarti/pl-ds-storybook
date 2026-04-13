@@ -1,0 +1,198 @@
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ---- Trigger ---- */
+.trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: var(--bg-default);
+  border: 1px solid var(--bg-border);
+  font-family: var(--font-family-default);
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+  position: relative;
+}
+
+.trigger:hover:not(.disabled) {
+  border-color: var(--content-primary);
+}
+
+.trigger:focus:not(.disabled),
+.triggerOpen {
+  border-color: var(--content-primary);
+  box-shadow: 0 0 0 1px var(--content-primary);
+}
+
+.trigger.error {
+  border-color: var(--accent-alert);
+}
+
+.trigger.error:focus {
+  box-shadow: 0 0 0 1px var(--accent-alert);
+}
+
+.trigger.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--bg-elevated);
+}
+
+/* ---- Sizes ---- */
+.sizeL {
+  height: 56px;
+  padding: 0 16px;
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-sm);
+}
+
+.sizeM {
+  height: 48px;
+  padding: 0 14px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+}
+
+/* ---- Label ---- */
+.label {
+  position: absolute;
+  left: 16px;
+  color: var(--content-secondary);
+  font-weight: var(--font-weight-regular);
+  transition: all 0.15s ease;
+  pointer-events: none;
+}
+
+.sizeM .label {
+  left: 14px;
+}
+
+.labelFloated {
+  font-size: var(--font-size-xs);
+  line-height: var(--font-line-height-2xs);
+  top: 8px;
+}
+
+.sizeL .labelFloated {
+  top: 8px;
+}
+
+.sizeM .labelFloated {
+  top: 6px;
+}
+
+.labelResting {
+  font-size: inherit;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ---- Value ---- */
+.value {
+  flex: 1;
+  text-align: left;
+  color: var(--content-primary);
+  font-weight: var(--font-weight-regular);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hasLabel .value {
+  padding-top: 10px;
+}
+
+.placeholder {
+  color: var(--content-highlight);
+}
+
+/* ---- Chevron ---- */
+.chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: var(--content-secondary);
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ---- Dropdown ---- */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--bg-default);
+  border: 1px solid var(--bg-base);
+  border-radius: var(--radius-sm);
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+  animation: dropdownFadeIn 0.15s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Option ---- */
+.option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-primary);
+  cursor: pointer;
+  border-radius: var(--radius-xs);
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.option:hover {
+  background: var(--interaction-ghost-bg-hover);
+}
+
+.optionSelected {
+  font-weight: var(--font-weight-semibold);
+  background: var(--bg-base);
+}
+
+.optionDisabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Hint ---- */
+.hint {
+  margin-top: 4px;
+}

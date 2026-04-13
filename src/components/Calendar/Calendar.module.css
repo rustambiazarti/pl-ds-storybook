@@ -1,0 +1,714 @@
+/* ========================================
+   Calendar Component — Styles
+   All states, variants, responsive, dark theme
+   ======================================== */
+
+/* ---- Calendar Wrapper ---- */
+.calendar {
+  display: inline-flex;
+  flex-direction: column;
+  background: var(--bg-default);
+  border-radius: var(--radius-base);
+  user-select: none;
+}
+
+.calendar.inline {
+  border: 1px solid var(--bg-base);
+}
+
+.calendar.dropdown {
+  box-shadow: var(--shadow-flag);
+  border: 1px solid var(--bg-base);
+  position: absolute;
+  z-index: 100;
+  top: calc(100% + 4px);
+  left: 0;
+}
+
+/* Sizes */
+.calendar.sizeL {
+  padding: var(--spacing-16);
+  min-width: 320px;
+}
+
+.calendar.sizeM {
+  padding: var(--spacing-12);
+  min-width: 280px;
+}
+
+/* Two-month layout */
+.calendarDual {
+  display: flex;
+  gap: var(--spacing-16);
+}
+
+.calendarDual .monthPanel {
+  flex: 1;
+}
+
+/* ---- Calendar Header ---- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-8);
+}
+
+.sizeL .header {
+  height: 40px;
+}
+
+.sizeM .header {
+  height: 36px;
+}
+
+.headerLabel {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-semibold);
+  color: var(--content-primary);
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: var(--spacing-4) var(--spacing-8);
+  border-radius: var(--radius-xs);
+  transition: background-color 150ms ease;
+}
+
+.headerLabel:hover {
+  background: var(--interaction-ghost-bg-hover);
+}
+
+.headerLabel:active {
+  background: var(--bg-base);
+}
+
+.sizeL .headerLabel {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-sm);
+}
+
+.sizeM .headerLabel {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+}
+
+/* Nav buttons */
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--content-secondary);
+  border-radius: var(--radius-xs);
+  transition: background-color 150ms ease, color 150ms ease;
+  flex-shrink: 0;
+}
+
+.sizeL .navBtn {
+  width: 40px;
+  height: 40px;
+}
+
+.sizeM .navBtn {
+  width: 36px;
+  height: 36px;
+}
+
+.navBtn:hover {
+  background: var(--interaction-ghost-bg-hover);
+  color: var(--content-primary);
+}
+
+.navBtn:active {
+  background: var(--bg-base);
+}
+
+.navBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.navBtn:disabled:hover {
+  background: transparent;
+}
+
+.navBtn:focus-visible {
+  outline: 2px solid var(--bg-border);
+  outline-offset: -2px;
+}
+
+/* ---- Weekday Row ---- */
+.weekdayRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.sizeL .weekdayRow {
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+.sizeM .weekdayRow {
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+}
+
+.weekdayCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-medium);
+  color: var(--content-highlight);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.sizeL .weekdayCell {
+  height: 32px;
+  font-size: var(--font-size-xs);
+  line-height: var(--font-line-height-2xs);
+}
+
+.sizeM .weekdayCell {
+  height: 28px;
+  font-size: 11px;
+  line-height: var(--font-line-height-2xs);
+}
+
+/* ---- Days Grid ---- */
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.sizeL .daysGrid {
+  gap: var(--spacing-2);
+}
+
+.sizeM .daysGrid {
+  gap: var(--spacing-2);
+}
+
+/* ---- Day Cell ---- */
+.dayCell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-primary);
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, border-color 100ms ease, transform 100ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sizeL .dayCell {
+  width: 40px;
+  height: 40px;
+  font-size: var(--font-size-sm);
+}
+
+.sizeM .dayCell {
+  width: 36px;
+  height: 36px;
+  font-size: var(--font-size-xs);
+}
+
+/* Day states */
+.dayCell:hover:not(.dayDisabled):not(.daySelected):not(.dayRangeStart):not(.dayRangeEnd) {
+  background: var(--interaction-ghost-bg-hover);
+}
+
+.dayCell:active:not(.dayDisabled):not(.daySelected) {
+  transform: scale(0.95);
+  background: var(--bg-base);
+}
+
+.dayCell:focus-visible {
+  outline: none;
+  border-color: var(--bg-border);
+}
+
+.dayOtherMonth {
+  color: var(--content-highlight);
+}
+
+.dayToday {
+  font-weight: var(--font-weight-semibold);
+  border-color: var(--content-primary);
+}
+
+.dayToday.daySelected {
+  border-color: transparent;
+}
+
+.daySelected {
+  background: var(--interaction-primary-bg);
+  color: var(--content-pure-inverse);
+  font-weight: var(--font-weight-medium);
+  border-color: transparent;
+}
+
+.daySelected:hover {
+  background: var(--interaction-primary-bg-hover) !important;
+}
+
+.dayDisabled {
+  color: var(--content-highlight);
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Range states ---- */
+.dayRangeStart {
+  background: var(--interaction-primary-bg);
+  color: var(--content-pure-inverse);
+  font-weight: var(--font-weight-medium);
+  border-radius: 50% 0 0 50%;
+  border-color: transparent;
+}
+
+.dayRangeEnd {
+  background: var(--interaction-primary-bg);
+  color: var(--content-pure-inverse);
+  font-weight: var(--font-weight-medium);
+  border-radius: 0 50% 50% 0;
+  border-color: transparent;
+}
+
+.dayRangeStart.dayRangeEnd {
+  border-radius: 50%;
+}
+
+.dayInRange {
+  background: var(--interaction-ghost-bg-hover);
+  border-radius: 0;
+  border-color: transparent;
+}
+
+.dayInRange:hover:not(.dayDisabled) {
+  background: var(--bg-base) !important;
+}
+
+.dayRangeStart:hover,
+.dayRangeEnd:hover {
+  background: var(--interaction-primary-bg-hover) !important;
+}
+
+/* Today dot under selected */
+.todayDot {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ---- Quick Select Bar ---- */
+.quickSelectBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-6);
+  border-top: 1px solid var(--bg-base);
+  padding-top: var(--spacing-12);
+  margin-top: var(--spacing-8);
+}
+
+.quickSelectBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 var(--spacing-12);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--content-secondary);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+  white-space: nowrap;
+}
+
+.quickSelectBtn:hover {
+  background: var(--interaction-ghost-bg-hover);
+}
+
+.quickSelectBtn:active {
+  background: var(--interaction-secondary-bg);
+}
+
+.quickSelectBtnActive {
+  background: var(--interaction-secondary-bg);
+  color: var(--interaction-secondary-content);
+}
+
+.quickSelectBtn:focus-visible {
+  outline: 2px solid var(--bg-border);
+  outline-offset: -2px;
+}
+
+/* ---- Date Picker Input ---- */
+.pickerWrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.pickerInput {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: var(--bg-default);
+  border: 1px solid var(--bg-base);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  position: relative;
+}
+
+.pickerInput.sizeL {
+  height: 56px;
+  border-radius: var(--radius-base);
+  padding: 0 var(--spacing-16);
+}
+
+.pickerInput.sizeM {
+  height: 48px;
+  border-radius: var(--radius-sm);
+  padding: 0 var(--spacing-14);
+}
+
+.pickerInput:hover:not(.pickerDisabled):not(.pickerError) {
+  border-color: var(--bg-border);
+}
+
+.pickerInput.pickerOpen {
+  border-color: var(--bg-border);
+}
+
+.pickerInput.pickerError {
+  border-color: var(--accent-alert);
+}
+
+.pickerInput.pickerDisabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pickerIconLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--content-secondary);
+  flex-shrink: 0;
+  margin-right: var(--spacing-8);
+}
+
+.pickerContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.pickerLabel {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-secondary);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    font-size 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left top;
+}
+
+.sizeL .pickerLabel {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-sm);
+}
+
+.sizeM .pickerLabel {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+}
+
+.pickerLabelFloating {
+  font-size: var(--font-size-xs) !important;
+  line-height: var(--font-line-height-2xs) !important;
+}
+
+.pickerValue {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-primary);
+}
+
+.sizeL .pickerValue {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-sm);
+}
+
+.sizeM .pickerValue {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+}
+
+.pickerPlaceholder {
+  color: var(--content-highlight);
+}
+
+.pickerClear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--content-highlight);
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: var(--spacing-4);
+  border-radius: 50%;
+  margin-left: var(--spacing-4);
+  flex-shrink: 0;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.pickerClear:hover {
+  color: var(--content-secondary);
+  background: var(--interaction-ghost-bg-hover);
+}
+
+/* ---- Range Picker Inputs ---- */
+.rangeInputs {
+  display: flex;
+  gap: var(--spacing-8);
+  align-items: flex-start;
+}
+
+.rangeInputs .pickerWrapper {
+  flex: 1;
+}
+
+.rangeSeparator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--content-highlight);
+  font-size: var(--font-size-sm);
+  padding-top: 16px;
+}
+
+/* ---- Month/Year Selector Overlay ---- */
+.selectorGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-8);
+  padding: var(--spacing-8) 0;
+}
+
+.selectorCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-primary);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.selectorCell:hover {
+  background: var(--interaction-ghost-bg-hover);
+}
+
+.selectorCell:active {
+  background: var(--bg-base);
+}
+
+.selectorCellSelected {
+  background: var(--interaction-primary-bg);
+  color: var(--content-pure-inverse);
+  font-weight: var(--font-weight-medium);
+}
+
+.selectorCellSelected:hover {
+  background: var(--interaction-primary-bg-hover);
+}
+
+.selectorCellDisabled {
+  color: var(--content-highlight);
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.selectorCell:focus-visible {
+  outline: 2px solid var(--bg-border);
+  outline-offset: -2px;
+}
+
+/* ---- Dropdown Animation ---- */
+.dropdownEnter {
+  animation: dropdownIn 200ms ease-out forwards;
+}
+
+.dropdownExit {
+  animation: dropdownOut 150ms ease-in forwards;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* ---- Month slide animations ---- */
+.monthSlideLeft {
+  animation: slideLeft 250ms ease-in-out;
+}
+
+.monthSlideRight {
+  animation: slideRight 250ms ease-in-out;
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---- Mobile Bottom Sheet ---- */
+@media (max-width: 639px) {
+  .calendar.dropdown {
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--radius-2xlg) var(--radius-2xlg) 0 0;
+    max-height: 80vh;
+    min-width: unset;
+    width: 100%;
+    padding: var(--spacing-16);
+    z-index: 1000;
+  }
+
+  .calendar.dropdown .dayCell {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-fade);
+    z-index: 999;
+  }
+
+  .dragHandle {
+    width: 36px;
+    height: 4px;
+    background: var(--bg-base);
+    border-radius: 2px;
+    margin: 0 auto var(--spacing-12);
+  }
+
+  .rangeInputs {
+    flex-direction: column;
+  }
+
+  .calendarDual {
+    flex-direction: column;
+    gap: var(--spacing-16);
+  }
+}
+
+/* ---- Tablet ---- */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .calendar.sizeL {
+    min-width: 300px;
+  }
+}
+
+/* ---- Hint ---- */
+.hint {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-xs);
+  line-height: var(--font-line-height-xs);
+  color: var(--content-secondary);
+}
+
+.hintError {
+  color: var(--accent-alert);
+}
+
+/* ---- Dark theme ---- */
+[data-theme="dark"] .calendar,
+[data-theme="dark"] .pickerInput {
+  --bg-default: #1A1A24;
+  --bg-base: rgba(255, 255, 255, 0.08);
+  --bg-border: #4A4A5C;
+  --bg-elevated: #242430;
+  --bg-floating: #1E1E2A;
+  --content-primary: #F0F0F5;
+  --content-secondary: #9999AC;
+  --content-highlight: #5C5C6E;
+  --content-pure-inverse: #0F0F15;
+  --interaction-primary-bg: #FFFFFF;
+  --interaction-primary-bg-hover: #E0E0E8;
+  --interaction-secondary-bg: rgba(255, 255, 255, 0.08);
+  --interaction-secondary-bg-hover: rgba(255, 255, 255, 0.12);
+  --interaction-secondary-content: #F0F0F5;
+  --interaction-ghost-bg-hover: rgba(255, 255, 255, 0.06);
+  --accent-alert: #FF4D5A;
+  --shadow-flag: 0px 2px 8px 0px rgba(0, 0, 0, 0.4);
+}

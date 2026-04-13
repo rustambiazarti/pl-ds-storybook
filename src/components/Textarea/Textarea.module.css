@@ -1,0 +1,143 @@
+/* ---- Wrapper ---- */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  align-items: flex-start;
+}
+
+.wrapper-L {
+  width: 265px;
+}
+
+.wrapper-M {
+  width: 265px;
+}
+
+/* ---- Field ---- */
+.field {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  background: var(--bg-default);
+  border: 1px solid var(--bg-base);
+  padding: var(--spacing-16);
+  min-height: 80px;
+  overflow: visible;
+  cursor: text;
+  transition: border-color 0.15s ease;
+  position: relative;
+}
+
+.size-L {
+  border-radius: var(--radius-base);
+}
+
+.size-M {
+  border-radius: var(--radius-sm);
+  min-height: 64px;
+  padding: var(--spacing-14);
+}
+
+/* ---- States ---- */
+.hovered {
+  border-color: var(--bg-border);
+}
+
+.focused {
+  border-color: var(--bg-border);
+}
+
+.error {
+  border-color: var(--accent-alert);
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.noResize .textarea {
+  resize: none;
+}
+
+/* ---- Content ---- */
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 0;
+  position: relative;
+}
+
+/* ---- Label ---- */
+.label {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 var(--spacing-4);
+  cursor: text;
+  flex-shrink: 0;
+  transform-origin: left top;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              font-size 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              line-height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.size-L .label {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-sm);
+}
+
+.size-M .label {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+}
+
+.labelFloating {
+  font-size: var(--font-size-xs) !important;
+  line-height: var(--font-line-height-2xs) !important;
+}
+
+/* ---- Textarea ---- */
+.textarea {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-primary);
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  resize: vertical;
+  padding: 0 var(--spacing-4);
+  flex: 1 1 0;
+  min-height: 0;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.size-L .textarea {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-sm);
+}
+
+.size-M .textarea {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+}
+
+.textarea::placeholder {
+  color: var(--content-highlight);
+}
+
+.textarea:disabled {
+  cursor: not-allowed;
+}
+
+.textareaHidden {
+  opacity: 0;
+  pointer-events: none;
+}

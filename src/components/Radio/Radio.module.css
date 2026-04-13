@@ -1,0 +1,80 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  cursor: pointer;
+  user-select: none;
+}
+
+.wrapper.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---- Circle ---- */
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1.5px solid var(--bg-border);
+  border-radius: 50%;
+  background: var(--bg-default);
+  transition: border-color 0.15s ease;
+}
+
+.size-L {
+  width: 24px;
+  height: 24px;
+}
+
+.size-M {
+  width: 20px;
+  height: 20px;
+}
+
+.circle.active {
+  border-color: var(--interaction-primary-bg);
+}
+
+.circle.error {
+  border-color: var(--accent-alert);
+}
+
+/* ---- Dot ---- */
+.dot {
+  display: block;
+  border-radius: 50%;
+  background: var(--interaction-primary-bg);
+}
+
+.size-L .dot {
+  width: 12px;
+  height: 12px;
+}
+
+.size-M .dot {
+  width: 10px;
+  height: 10px;
+}
+
+.circle.error .dot {
+  background: var(--accent-alert);
+}
+
+/* ---- Label ---- */
+.label {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-primary);
+}
+
+.label-L {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-sm);
+}
+
+.label-M {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+}

@@ -1,0 +1,102 @@
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--bg-base);
+  overflow: hidden;
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--content-secondary);
+}
+
+/* ---- Sizes ---- */
+.size-XL {
+  width: 64px;
+  height: 64px;
+  font-size: 24px;
+}
+
+.size-L {
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
+}
+
+.size-M {
+  width: 40px;
+  height: 40px;
+  font-size: var(--font-size-md);
+}
+
+.size-S {
+  width: 32px;
+  height: 32px;
+  font-size: var(--font-size-sm);
+}
+
+.size-XS {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+}
+
+/* ---- Image ---- */
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Initials ---- */
+.initials {
+  line-height: 1;
+}
+
+/* ---- Status dot ---- */
+.statusDot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  border: 2px solid var(--bg-default);
+}
+
+.size-XL .statusDot {
+  width: 16px;
+  height: 16px;
+}
+
+.size-L .statusDot {
+  width: 14px;
+  height: 14px;
+}
+
+.size-M .statusDot {
+  width: 12px;
+  height: 12px;
+}
+
+.size-S .statusDot {
+  width: 10px;
+  height: 10px;
+}
+
+.size-XS .statusDot {
+  width: 8px;
+  height: 8px;
+}
+
+.status-online {
+  background: #4caf50;
+}
+
+.status-offline {
+  background: var(--bg-border);
+}
+
+.status-away {
+  background: #ff9800;
+}

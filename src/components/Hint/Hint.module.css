@@ -1,0 +1,30 @@
+.hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--accent-alert);
+}
+
+.text {
+  flex: 1;
+  padding: 0 var(--spacing-4);
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+  color: var(--content-secondary);
+  white-space: pre-wrap;
+}
+
+.error .text {
+  color: var(--accent-alert);
+}
+
+.error .icon {
+  color: var(--accent-alert);
+}

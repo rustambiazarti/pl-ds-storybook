@@ -1,0 +1,169 @@
+/* ============================================
+   Button — Design System WEB
+   Variants: primary / secondary / ghost
+   Sizes: L (56px) / M (48px) / S (40px) / XS (32px)
+   Types: flexible / fixed (220px) / icon-only
+   ============================================ */
+
+/* ---- Base ---- */
+.button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-semibold, 600);
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+  outline: none;
+}
+
+/* ---- Variant: Primary ---- */
+.variant-primary {
+  background-color: var(--interaction-primary-bg, #221327);
+  color: var(--content-pure-inverse, #ffffff);
+}
+
+.variant-primary:hover:not(:disabled) {
+  background-color: var(--interaction-primary-bg-hover, #3c3c4a);
+  color: var(--interaction-primary-content-hover, #ecedf2);
+}
+
+/* ---- Variant: Secondary ---- */
+.variant-secondary {
+  background-color: var(--interaction-secondary-bg, #ecedf2);
+  color: var(--content-primary, #0f0f15);
+}
+
+.variant-secondary:hover:not(:disabled) {
+  background-color: var(--interaction-secondary-bg-hover, #f5f5f8);
+  color: var(--interaction-secondary-content-hover, #6e6e81);
+}
+
+/* ---- Variant: Ghost ---- */
+.variant-ghost {
+  background-color: transparent;
+  color: var(--content-primary, #0f0f15);
+}
+
+.variant-ghost:hover:not(:disabled) {
+  background-color: var(--interaction-secondary-bg-hover, #f5f5f8);
+  color: var(--interaction-secondary-content-hover, #6e6e81);
+}
+
+/* ---- Size: L (56px) ---- */
+.size-L {
+  padding: 16px;
+  border-radius: var(--radius-base, 16px);
+  font-size: var(--font-size-md, 16px);
+  line-height: var(--font-line-height-sm, 20px);
+}
+
+/* ---- Size: M (48px) ---- */
+.size-M {
+  padding: 12px 16px;
+  border-radius: var(--radius-base, 16px);
+  font-size: var(--font-size-md, 16px);
+  line-height: var(--font-line-height-sm, 20px);
+}
+
+/* ---- Size: S (40px) ---- */
+.size-S {
+  padding: 8px 16px;
+  border-radius: var(--radius-sm, 12px);
+  font-size: var(--font-size-md, 16px);
+  line-height: var(--font-line-height-sm, 20px);
+}
+
+/* ---- Size: XS (32px) ---- */
+.size-XS {
+  padding: 7px 16px;
+  border-radius: var(--radius-xs, 8px);
+  font-size: var(--font-size-sm, 14px);
+  line-height: var(--font-line-height-xs, 18px);
+}
+
+/* ---- Type: Fixed ---- */
+.type-fixed {
+  width: 220px;
+}
+
+/* ---- Type: Icon Only ---- */
+.type-icon-only.size-L {
+  width: 56px;
+  height: 56px;
+  padding: 16px;
+}
+
+.type-icon-only.size-M {
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+}
+
+.type-icon-only.size-S {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+}
+
+.type-icon-only.size-XS {
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+}
+
+/* ---- States ---- */
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.loading {
+  cursor: wait;
+}
+
+/* ---- Content layout ---- */
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ---- Icon wrapper ---- */
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* ---- Label ---- */
+.label {
+  padding: 0 8px;
+  text-align: center;
+}
+
+.size-XS .label {
+  padding: 0 6px;
+}
+
+/* ---- Spinner ---- */
+.spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
