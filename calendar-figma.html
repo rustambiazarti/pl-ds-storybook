@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar Component — Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+/* ---- Tokens ---- */
+:root {
+  --bg-default: #ffffff;
+  --bg-base: rgba(153,153,172,0.16);
+  --bg-border: #9999ac;
+  --bg-elevated: #f5f5f7;
+  --content-primary: #0f0f15;
+  --content-secondary: #6e6e81;
+  --content-highlight: #b3b3c3;
+  --content-pure-inverse: #ffffff;
+  --accent-alert: #f93643;
+  --accent-link: #1a56ff;
+  --bg-fade: rgba(15,15,21,0.5);
+  --bg-floating: #ffffff;
+  --interaction-primary-bg: #221327;
+  --interaction-primary-bg-hover: #3c3c4a;
+  --interaction-secondary-bg: #ecedf2;
+  --interaction-secondary-bg-hover: #dddee5;
+  --interaction-secondary-content: #221327;
+  --interaction-ghost-bg-hover: rgba(153,153,172,0.08);
+  --font-family: 'Inter', sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --line-height-xs: 18px;
+  --line-height-sm: 20px;
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-base: 16px;
+  --radius-2xlg: 24px;
+  --shadow-dropdown: 0px 0px 2px rgba(147,161,176,0.1), 0px 2px 4px rgba(147,161,176,0.2);
+  --shadow-flag: 0px 1px 4px 0px rgba(0,0,0,0.16);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-family);
+  color: var(--content-primary);
+  background: #f0f0f3;
+  padding: 48px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Layout ---- */
+.page { max-width: 1800px; margin: 0 auto; }
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--content-primary);
+}
+.subsection-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--content-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+.section { margin-bottom: 64px; }
+.row { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 32px; }
+.col { display: flex; flex-direction: column; gap: 8px; }
+.label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--content-highlight);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* =======================================
+   CALENDAR BASE
+   ======================================= */
+.calendar {
+  background: var(--bg-default);
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-dropdown);
+  padding: 20px;
+  width: 344px;
+  user-select: none;
+}
+.calendar.size-m {
+  width: 296px;
+  padding: 16px;
+}
+.calendar.dual {
+  width: 712px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.calendar.dual .month-panel {
+  flex: 1;
+  min-width: 0;
+}
+.calendar.dual.has-quick-select {
+  width: 920px;
+}
+.calendar.dual .quick-select-sidebar {
+  width: 180px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.calendar.dual .quick-select-sidebar .quick-chip {
+  width: 100%;
+  text-align: center;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+}
+.calendar.dual .months-wrapper {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---- Header ---- */
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  height: 32px;
+}
+.cal-header-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--content-primary);
+  cursor: pointer;
+}
+.cal-header-title:hover {
+  color: var(--accent-link);
+}
+.nav-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--content-secondary);
+}
+.nav-btn:hover {
+  background: var(--interaction-ghost-bg-hover);
+}
+.nav-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---- Weekdays ---- */
+.weekday-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+.weekday-cell {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--content-highlight);
+  line-height: 32px;
+}
+
+/* ---- Days Grid ---- */
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.day-cell {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-primary);
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+}
+.size-m .day-cell {
+  height: 34px;
+  font-size: var(--font-size-xs);
+}
+
+/* Circle highlight — real DOM element for Figma capture */
+.day-bg {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.day-cell span.day-num {
+  position: relative;
+  z-index: 1;
+}
+.size-m .day-bg {
+  width: 34px;
+  height: 34px;
+}
+
+/* Day States */
+.day-cell.other-month {
+  color: var(--content-highlight);
+}
+.day-cell.today {
+  font-weight: var(--font-weight-semibold);
+  color: var(--accent-link);
+}
+.day-cell.hover .day-bg {
+  background: var(--interaction-ghost-bg-hover);
+}
+.day-cell.selected {
+  color: var(--content-pure-inverse);
+  font-weight: var(--font-weight-medium);
+}
+.day-cell.selected .day-bg {
+  background: var(--interaction-primary-bg);
+}
+.day-cell.pressed {
+  color: var(--content-pure-inverse);
+}
+.day-cell.pressed .day-bg {
+  background: var(--interaction-primary-bg-hover);
+}
+.day-cell.disabled {
+  color: var(--content-highlight);
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+/* Range — continuous strip via cell background, circle via .day-bg */
+.day-cell.in-range {
+  background: rgba(34,19,39,0.16);
+  color: var(--content-primary);
+}
+.day-cell.range-start {
+  color: var(--content-pure-inverse);
+  font-weight: var(--font-weight-medium);
+  background: linear-gradient(to right, transparent 50%, rgba(34,19,39,0.16) 50%);
+}
+.day-cell.range-start .day-bg {
+  background: var(--interaction-primary-bg);
+}
+.day-cell.range-end {
+  color: var(--content-pure-inverse);
+  font-weight: var(--font-weight-medium);
+  background: linear-gradient(to left, transparent 50%, rgba(34,19,39,0.16) 50%);
+}
+.day-cell.range-end .day-bg {
+  background: var(--interaction-primary-bg);
+}
+.day-cell.focus {
+  outline: 2px solid var(--accent-link);
+  outline-offset: 2px;
+}
+
+/* ---- Quick Select ---- */
+.quick-select {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.quick-chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  background: var(--interaction-secondary-bg);
+  color: var(--interaction-secondary-content);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+.quick-chip:hover {
+  background: var(--interaction-secondary-bg-hover);
+}
+.quick-chip.active {
+  background: var(--interaction-primary-bg);
+  color: var(--content-pure-inverse);
+}
+
+/* ---- Month/Year Selector ---- */
+.selector-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 8px 0;
+}
+.selector-cell {
+  padding: 10px 4px;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-primary);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: var(--font-family);
+}
+.selector-cell:hover {
+  background: var(--interaction-ghost-bg-hover);
+}
+.selector-cell.selected {
+  background: var(--interaction-primary-bg);
+  color: var(--content-pure-inverse);
+  font-weight: var(--font-weight-medium);
+}
+
+/* =======================================
+   DATE PICKER INPUT
+   ======================================= */
+.picker-wrapper {
+  position: relative;
+  width: 300px;
+}
+.picker-input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid var(--bg-base);
+  border-radius: var(--radius-base);
+  padding: 24px 48px 8px 16px;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  color: var(--content-primary);
+  background: var(--bg-default);
+  outline: none;
+  cursor: pointer;
+}
+.picker-input.size-m {
+  height: 48px;
+  border-radius: var(--radius-sm);
+  padding: 20px 48px 6px 16px;
+}
+.picker-input:hover {
+  border-color: var(--bg-border);
+}
+.picker-input.focused {
+  border-color: var(--content-primary);
+  border-width: 2px;
+  padding: 23px 47px 7px 15px;
+}
+.picker-input.error {
+  border-color: var(--accent-alert);
+}
+.picker-input.disabled {
+  background: var(--bg-elevated);
+  color: var(--content-highlight);
+  cursor: not-allowed;
+  border-color: transparent;
+}
+.picker-label {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-secondary);
+  pointer-events: none;
+}
+.picker-label.placeholder {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-sm);
+}
+.picker-label.error {
+  color: var(--accent-alert);
+}
+.picker-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--content-secondary);
+  display: flex;
+}
+.picker-clear {
+  position: absolute;
+  right: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--content-highlight);
+  cursor: pointer;
+  display: flex;
+  border: none;
+  background: none;
+  padding: 4px;
+  border-radius: 50%;
+}
+.picker-clear:hover {
+  color: var(--content-secondary);
+  background: var(--interaction-ghost-bg-hover);
+}
+.picker-hint {
+  margin-top: 4px;
+  font-size: var(--font-size-xs);
+  color: var(--content-secondary);
+  padding-left: 16px;
+}
+.picker-hint.error {
+  color: var(--accent-alert);
+}
+
+/* ---- Range Input ---- */
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.range-sep {
+  color: var(--content-highlight);
+  font-size: 18px;
+}
+
+/* ---- Dropdown Preview ---- */
+.dropdown-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dropdown-calendar {
+  /* Static positioning for Figma capture — no overlap */
+}
+
+/* =======================================
+   DAY STATES SHOWCASE
+   ======================================= */
+.states-grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.state-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.state-circle {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--content-primary);
+  border-radius: 50%;
+}
+.state-circle.other-month { color: var(--content-highlight); }
+.state-circle.today { font-weight: 600; color: var(--accent-link); }
+.state-circle.hover { background: var(--interaction-ghost-bg-hover); }
+.state-circle.selected { background: var(--interaction-primary-bg); color: #fff; font-weight: 500; }
+.state-circle.pressed { background: var(--interaction-primary-bg-hover); color: #fff; }
+.state-circle.disabled { color: var(--content-highlight); opacity: 0.4; }
+.state-circle.focus { outline: 2px solid var(--accent-link); outline-offset: 2px; }
+.state-circle.range-start { background: var(--interaction-primary-bg); color: #fff; border-radius: 50% 0 0 50%; }
+.state-circle.range-end { background: var(--interaction-primary-bg); color: #fff; border-radius: 0 50% 50% 0; }
+.state-circle.in-range { background: rgba(34,19,39,0.16); border-radius: 0; }
+.state-label { font-size: 10px; color: var(--content-highlight); text-transform: uppercase; letter-spacing: 0.3px; }
+
+/* =======================================
+   DARK THEME
+   ======================================= */
+.dark-section {
+  background: #1a1a24;
+  padding: 32px;
+  border-radius: 20px;
+}
+.dark-section .calendar {
+  background: #252530;
+  box-shadow: 0px 0px 2px rgba(0,0,0,0.3), 0px 4px 8px rgba(0,0,0,0.4);
+}
+.dark-section .cal-header-title { color: #e8e8f0; }
+.dark-section .nav-btn { color: #9999ac; }
+.dark-section .nav-btn:hover { background: rgba(255,255,255,0.06); }
+.dark-section .weekday-cell { color: #6e6e81; }
+.dark-section .day-cell { color: #e8e8f0; }
+.dark-section .day-cell.other-month { color: #4a4a5c; }
+.dark-section .day-cell.today { color: #5b8aff; }
+.dark-section .day-cell.hover { background: rgba(255,255,255,0.06); }
+.dark-section .day-cell.selected { background: #e8e8f0; color: #1a1a24; }
+.dark-section .day-cell.disabled { color: #4a4a5c; opacity: 0.4; }
+.dark-section .day-cell.in-range { background: rgba(232,232,240,0.1); }
+.dark-section .day-cell.range-start { background: linear-gradient(to right, transparent 50%, rgba(232,232,240,0.1) 50%); color: #1a1a24; }
+.dark-section .day-cell.range-start .day-bg { background: #e8e8f0; }
+.dark-section .day-cell.range-end { background: linear-gradient(to left, transparent 50%, rgba(232,232,240,0.1) 50%); color: #1a1a24; }
+.dark-section .day-cell.range-end .day-bg { background: #e8e8f0; }
+.dark-section .day-cell.selected .day-bg { background: #e8e8f0; }
+.dark-section .quick-chip { background: rgba(255,255,255,0.08); color: #e8e8f0; }
+.dark-section .quick-chip:hover { background: rgba(255,255,255,0.12); }
+.dark-section .quick-chip.active { background: #e8e8f0; color: #1a1a24; }
+.dark-section .subsection-title { color: #6e6e81; }
+
+/* SVG Icons */
+svg { display: block; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- =============================================
+     SECTION 1: DAY CELL STATES
+     ============================================= -->
+<div class="section">
+  <div class="section-title">Day Cell States</div>
+  <div class="states-grid">
+    <div class="state-item">
+      <div class="state-circle">15</div>
+      <span class="state-label">Default</span>
+    </div>
+    <div class="state-item">
+      <div class="state-circle hover">15</div>
+      <span class="state-label">Hover</span>
+    </div>
+    <div class="state-item">
+      <div class="state-circle pressed">15</div>
+      <span class="state-label">Pressed</span>
+    </div>
+    <div class="state-item">
+      <div class="state-circle selected">15</div>
+      <span class="state-label">Selected</span>
+    </div>
+    <div class="state-item">
+      <div class="state-circle today">15</div>
+      <span class="state-label">Today</span>
+    </div>
+    <div class="state-item">
+      <div class="state-circle other-month">15</div>
+      <span class="state-label">Other Month</span>
+    </div>
+    <div class="state-item">
+      <div class="state-circle disabled">15</div>
+      <span class="state-label">Disabled</span>
+    </div>
+    <div class="state-item">
+      <div class="state-circle focus">15</div>
+      <span class="state-label">Focus</span>
+    </div>
+    <div class="state-item">
+      <div class="state-circle range-start">10</div>
+      <span class="state-label">Range Start</span>
+    </div>
+    <div class="state-item">
+      <div class="state-circle in-range">12</div>
+      <span class="state-label">In Range</span>
+    </div>
+    <div class="state-item">
+      <div class="state-circle range-end">18</div>
+      <span class="state-label">Range End</span>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     SECTION 2: INLINE CALENDAR — SINGLE DATE
+     ============================================= -->
+<div class="section">
+  <div class="section-title">Inline Calendar</div>
+  <div class="row">
+    <!-- Size L -->
+    <div class="col">
+      <span class="label">Size L / Single Date</span>
+      <div class="calendar" id="cal-single-l"></div>
+    </div>
+    <!-- Size M -->
+    <div class="col">
+      <span class="label">Size M / Single Date</span>
+      <div class="calendar size-m" id="cal-single-m"></div>
+    </div>
+    <!-- With Quick Select -->
+    <div class="col">
+      <span class="label">With Quick Select</span>
+      <div class="calendar" id="cal-quick"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     SECTION 3: INLINE CALENDAR — RANGE
+     ============================================= -->
+<div class="section">
+  <div class="section-title">Inline Calendar — Date Range</div>
+  <div class="row">
+    <div class="col">
+      <span class="label">Dual Month / Range Selection</span>
+      <div class="calendar dual" id="cal-range"></div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 16px;">
+    <div class="col">
+      <span class="label">Dual Month / Range + Quick Select</span>
+      <div class="calendar dual" id="cal-range-quick"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     SECTION 4: MONTH & YEAR SELECTORS
+     ============================================= -->
+<div class="section">
+  <div class="section-title">Month & Year Selectors</div>
+  <div class="row">
+    <div class="col">
+      <span class="label">Month Selector</span>
+      <div class="calendar" id="cal-month-sel"></div>
+    </div>
+    <div class="col">
+      <span class="label">Year Selector</span>
+      <div class="calendar" id="cal-year-sel"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     SECTION 5: DATE PICKER (DROPDOWN)
+     ============================================= -->
+<div class="section">
+  <div class="section-title">DatePicker (Dropdown)</div>
+  <div class="row">
+    <div class="col">
+      <span class="label">Default (Empty)</span>
+      <div class="picker-wrapper">
+        <span class="picker-label placeholder">Дата</span>
+        <input class="picker-input" readonly value="">
+        <span class="picker-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.75" width="15" height="13.75" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5H17.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.25 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.75 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </div>
+    </div>
+    <div class="col">
+      <span class="label">Filled</span>
+      <div class="picker-wrapper">
+        <span class="picker-label">Дата</span>
+        <input class="picker-input" readonly value="09.03.2026">
+        <button class="picker-clear"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5Z" fill="currentColor" fill-opacity="0.12"/><path d="M10 6L6 10M6 6L10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <span class="picker-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.75" width="15" height="13.75" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5H17.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.25 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.75 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </div>
+    </div>
+    <div class="col">
+      <span class="label">Focused</span>
+      <div class="picker-wrapper">
+        <span class="picker-label">Дата</span>
+        <input class="picker-input focused" readonly value="09.03.2026">
+        <span class="picker-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.75" width="15" height="13.75" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5H17.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.25 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.75 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </div>
+    </div>
+    <div class="col">
+      <span class="label">Error</span>
+      <div class="picker-wrapper">
+        <span class="picker-label error">Дата</span>
+        <input class="picker-input error" readonly value="">
+        <span class="picker-icon" style="color:var(--accent-alert)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.75" width="15" height="13.75" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5H17.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.25 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.75 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        <div class="picker-hint error">Обязательное поле</div>
+      </div>
+    </div>
+    <div class="col">
+      <span class="label">Disabled</span>
+      <div class="picker-wrapper">
+        <span class="picker-label" style="color:var(--content-highlight)">Дата</span>
+        <input class="picker-input disabled" readonly value="09.03.2026" disabled>
+        <span class="picker-icon" style="color:var(--content-highlight)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.75" width="15" height="13.75" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5H17.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.25 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.75 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </div>
+    </div>
+  </div>
+  <!-- Size M -->
+  <div class="row" style="margin-top: 24px;">
+    <div class="col">
+      <span class="label">Size M / Default</span>
+      <div class="picker-wrapper">
+        <span class="picker-label placeholder" style="font-size:12px;top:50%;transform:translateY(-50%);">Дата</span>
+        <input class="picker-input size-m" readonly value="">
+        <span class="picker-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.75" width="15" height="13.75" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5H17.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.25 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.75 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </div>
+    </div>
+    <div class="col">
+      <span class="label">Size M / Filled</span>
+      <div class="picker-wrapper">
+        <span class="picker-label" style="top:5px;font-size:11px;">Дата</span>
+        <input class="picker-input size-m" readonly value="09.03.2026">
+        <span class="picker-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.75" width="15" height="13.75" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5H17.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.25 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.75 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     SECTION 6: DATE PICKER — OPEN STATE
+     ============================================= -->
+<div class="section">
+  <div class="section-title">DatePicker — Open State</div>
+  <div class="row">
+    <div class="col">
+      <span class="label">Open with Calendar</span>
+      <div class="dropdown-preview">
+        <div class="picker-wrapper">
+          <span class="picker-label">Дата</span>
+          <input class="picker-input focused" readonly value="09.03.2026">
+          <span class="picker-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.75" width="15" height="13.75" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5H17.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.25 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.75 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        </div>
+        <div class="dropdown-calendar">
+          <div class="calendar" id="cal-dropdown-open"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <span class="label">Open with Quick Select</span>
+      <div class="dropdown-preview">
+        <div class="picker-wrapper">
+          <span class="picker-label">Дата</span>
+          <input class="picker-input focused" readonly value="">
+          <span class="picker-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.75" width="15" height="13.75" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5H17.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.25 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.75 2.5V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        </div>
+        <div class="dropdown-calendar">
+          <div class="calendar" id="cal-dropdown-quick"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     SECTION 7: DATE RANGE PICKER
+     ============================================= -->
+<div class="section">
+  <div class="section-title">DateRangePicker</div>
+  <div class="row">
+    <div class="col">
+      <span class="label">Default (Empty)</span>
+      <div class="range-inputs">
+        <div class="picker-wrapper" style="width:200px;">
+          <span class="picker-label placeholder">Начало</span>
+          <input class="picker-input" style="padding-right:16px;" readonly value="">
+        </div>
+        <span class="range-sep">&mdash;</span>
+        <div class="picker-wrapper" style="width:200px;">
+          <span class="picker-label placeholder">Конец</span>
+          <input class="picker-input" style="padding-right:16px;" readonly value="">
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <span class="label">Filled</span>
+      <div class="range-inputs">
+        <div class="picker-wrapper" style="width:200px;">
+          <span class="picker-label">Начало</span>
+          <input class="picker-input" style="padding-right:16px;" readonly value="10.03.2026">
+        </div>
+        <span class="range-sep">&mdash;</span>
+        <div class="picker-wrapper" style="width:200px;">
+          <span class="picker-label">Конец</span>
+          <input class="picker-input" style="padding-right:16px;" readonly value="21.03.2026">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Open State -->
+  <div class="row" style="margin-top:24px;">
+    <div class="col">
+      <span class="label">Open with Range Calendar</span>
+      <div class="dropdown-preview">
+        <div class="range-inputs">
+          <div class="picker-wrapper" style="width:200px;">
+            <span class="picker-label">Начало</span>
+            <input class="picker-input focused" style="padding-right:16px;" readonly value="10.03.2026">
+          </div>
+          <span class="range-sep">&mdash;</span>
+          <div class="picker-wrapper" style="width:200px;">
+            <span class="picker-label">Конец</span>
+            <input class="picker-input" style="padding-right:16px;" readonly value="21.03.2026">
+          </div>
+        </div>
+        <div class="dropdown-calendar">
+          <div class="calendar dual" id="cal-range-dropdown"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     SECTION 8: DARK THEME
+     ============================================= -->
+<div class="section">
+  <div class="section-title">Dark Theme</div>
+  <div class="dark-section">
+    <div class="row">
+      <div class="col">
+        <span class="subsection-title" style="color:#6e6e81;">Single Date</span>
+        <div class="calendar" id="cal-dark-single"></div>
+      </div>
+      <div class="col">
+        <span class="subsection-title" style="color:#6e6e81;">With Quick Select</span>
+        <div class="calendar" id="cal-dark-quick"></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 24px;">
+      <div class="col">
+        <span class="subsection-title" style="color:#6e6e81;">Range — Dual Month</span>
+        <div class="calendar dual" id="cal-dark-range"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     SECTION 9: ENGLISH LOCALE
+     ============================================= -->
+<div class="section">
+  <div class="section-title">English Locale (Sunday Start)</div>
+  <div class="row">
+    <div class="col">
+      <span class="label">en-US / Single Date</span>
+      <div class="calendar" id="cal-en"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+// ---- Helpers ----
+const WEEKDAYS_RU = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const WEEKDAYS_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MONTHS_RU = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const MONTHS_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTHS_SHORT_RU = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
+
+function chevronLeft() {
+  return '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+function chevronRight() {
+  return '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+
+function getDaysInMonth(year, month) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function getFirstDayOfWeek(year, month, startDay) {
+  let d = new Date(year, month, 1).getDay();
+  if (startDay === 1) d = d === 0 ? 6 : d - 1;
+  return d;
+}
+
+function renderCalendar(el, opts = {}) {
+  const {
+    year = 2026, month = 2, selectedDay = 9, todayDay = 9,
+    weekdays = WEEKDAYS_RU, months = MONTHS_RU,
+    startDay = 1, showQuickSelect = false, quickActiveIdx = -1,
+    rangeStart = -1, rangeEnd = -1, disabledDays = [],
+    showNav = true, view = 'days'
+  } = opts;
+
+  let html = '';
+
+  // Quick select
+  if (showQuickSelect) {
+    const chips = ['Сегодня','Вчера','Последние 7 дней','Последние 30 дней','Этот месяц'];
+    html += '<div class="quick-select">';
+    chips.forEach((c, i) => {
+      html += `<button class="quick-chip${i === quickActiveIdx ? ' active' : ''}">${c}</button>`;
+    });
+    html += '</div>';
+  }
+
+  // Header
+  html += '<div class="cal-header">';
+  if (showNav) html += `<button class="nav-btn">${chevronLeft()}</button>`;
+  html += `<span class="cal-header-title">${months[month]} ${year}</span>`;
+  if (showNav) html += `<button class="nav-btn">${chevronRight()}</button>`;
+  html += '</div>';
+
+  if (view === 'months') {
+    html += '<div class="selector-grid">';
+    MONTHS_SHORT_RU.forEach((m, i) => {
+      html += `<button class="selector-cell${i === month ? ' selected' : ''}">${m}</button>`;
+    });
+    html += '</div>';
+    el.innerHTML = html;
+    return;
+  }
+  if (view === 'years') {
+    html += '<div class="selector-grid">';
+    for (let y = 2020; y <= 2031; y++) {
+      html += `<button class="selector-cell${y === year ? ' selected' : ''}">${y}</button>`;
+    }
+    html += '</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  // Weekdays
+  html += '<div class="weekday-row">';
+  weekdays.forEach(w => { html += `<div class="weekday-cell">${w}</div>`; });
+  html += '</div>';
+
+  // Days
+  const daysInMonth = getDaysInMonth(year, month);
+  const firstDay = getFirstDayOfWeek(year, month, startDay);
+  const prevDays = getDaysInMonth(year, month - 1);
+
+  html += '<div class="days-grid">';
+  // Previous month
+  for (let i = firstDay - 1; i >= 0; i--) {
+    html += `<div class="day-cell other-month"><span class="day-num">${prevDays - i}</span></div>`;
+  }
+  // Current month
+  for (let d = 1; d <= daysInMonth; d++) {
+    let cls = 'day-cell';
+    let needsBg = false;
+    if (disabledDays.includes(d)) cls += ' disabled';
+    else if (d === selectedDay && rangeStart < 0) { cls += ' selected'; needsBg = true; }
+    else if (d === todayDay && d !== selectedDay) cls += ' today';
+
+    // Range
+    if (rangeStart > 0 && rangeEnd > 0) {
+      if (d === rangeStart) { cls += ' range-start'; needsBg = true; }
+      else if (d === rangeEnd) { cls += ' range-end'; needsBg = true; }
+      else if (d > rangeStart && d < rangeEnd) cls += ' in-range';
+    }
+    const bg = needsBg ? '<span class="day-bg"></span>' : '';
+    html += `<div class="${cls}">${bg}<span class="day-num">${d}</span></div>`;
+  }
+  // Next month
+  const totalCells = firstDay + daysInMonth;
+  const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+  for (let i = 1; i <= remaining; i++) {
+    html += `<div class="day-cell other-month"><span class="day-num">${i}</span></div>`;
+  }
+  html += '</div>';
+
+  el.innerHTML = html;
+}
+
+function renderDualCalendar(el, opts = {}) {
+  const { year = 2026, month1 = 2, month2 = 3, rangeStart = 10, rangeEnd = 21,
+          showQuickSelect = false, quickActiveIdx = -1 } = opts;
+
+  let html = '';
+  if (showQuickSelect) {
+    el.classList.add('has-quick-select');
+    const chips = ['Сегодня','Вчера','Последние 7 дней','Последние 30 дней','Этот месяц'];
+    html += '<div class="quick-select-sidebar">';
+    chips.forEach((c, i) => {
+      html += `<button class="quick-chip${i === quickActiveIdx ? ' active' : ''}">${c}</button>`;
+    });
+    html += '</div>';
+  }
+
+  if (showQuickSelect) {
+    html += '<div class="months-wrapper">';
+  }
+  html += '<div class="month-panel" id="__p1"></div>';
+  html += '<div class="month-panel" id="__p2"></div>';
+  if (showQuickSelect) {
+    html += '</div>';
+  }
+
+  el.innerHTML = html;
+
+  const p1 = el.querySelector('#__p1');
+  const p2 = el.querySelector('#__p2');
+  // Unique IDs
+  p1.removeAttribute('id');
+  p2.removeAttribute('id');
+
+  renderCalendar(p1, { year, month: month1, selectedDay: -1, todayDay: 9, rangeStart: month1 === 2 ? rangeStart : -1, rangeEnd: month1 === 2 ? rangeEnd : -1 });
+  renderCalendar(p2, { year, month: month2, selectedDay: -1, todayDay: -1, rangeStart: month2 === 2 ? rangeStart : -1, rangeEnd: month2 === 2 ? rangeEnd : -1, showNav: true });
+}
+
+// ---- Render All ----
+renderCalendar(document.getElementById('cal-single-l'), { selectedDay: 9, todayDay: 9 });
+renderCalendar(document.getElementById('cal-single-m'), { selectedDay: 9, todayDay: 9 });
+renderCalendar(document.getElementById('cal-quick'), { selectedDay: 9, todayDay: 9, showQuickSelect: true, quickActiveIdx: 0 });
+
+renderDualCalendar(document.getElementById('cal-range'), { rangeStart: 10, rangeEnd: 21 });
+renderDualCalendar(document.getElementById('cal-range-quick'), { rangeStart: 10, rangeEnd: 21, showQuickSelect: true, quickActiveIdx: 2 });
+
+// Month & Year
+renderCalendar(document.getElementById('cal-month-sel'), { view: 'months' });
+renderCalendar(document.getElementById('cal-year-sel'), { view: 'years' });
+
+// Dropdown open
+renderCalendar(document.getElementById('cal-dropdown-open'), { selectedDay: 9, todayDay: 9 });
+renderCalendar(document.getElementById('cal-dropdown-quick'), { todayDay: 9, showQuickSelect: true });
+
+// Range dropdown
+renderDualCalendar(document.getElementById('cal-range-dropdown'), { rangeStart: 10, rangeEnd: 21, showQuickSelect: true });
+
+// Dark
+renderCalendar(document.getElementById('cal-dark-single'), { selectedDay: 9, todayDay: 9 });
+renderCalendar(document.getElementById('cal-dark-quick'), { selectedDay: 9, todayDay: 9, showQuickSelect: true, quickActiveIdx: 0 });
+renderDualCalendar(document.getElementById('cal-dark-range'), { rangeStart: 10, rangeEnd: 21, showQuickSelect: true, quickActiveIdx: 2 });
+
+// English
+renderCalendar(document.getElementById('cal-en'), {
+  weekdays: WEEKDAYS_EN, months: MONTHS_EN, startDay: 0,
+  selectedDay: 9, todayDay: 9
+});
+</script>
+</body>
+</html>
