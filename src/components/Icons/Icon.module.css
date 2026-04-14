@@ -1,0 +1,59 @@
+/* ==========================================================================
+   Icon Gallery — Storybook display styles
+   ========================================================================== */
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-40);
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.categoryTitle {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-md);
+  color: var(--content-primary);
+  margin: 0;
+  padding-bottom: var(--spacing-8);
+  border-bottom: 1px solid var(--bg-border);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--spacing-8);
+}
+
+.iconCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12);
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--bg-border);
+  background: var(--bg-default);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.iconCard:hover {
+  background: var(--bg-base);
+  border-color: var(--bg-border-hover);
+}
+
+.iconName {
+  font-family: var(--font-family-default);
+  font-size: 11px;
+  line-height: 14px;
+  color: var(--content-secondary);
+  text-align: center;
+  word-break: break-word;
+}
