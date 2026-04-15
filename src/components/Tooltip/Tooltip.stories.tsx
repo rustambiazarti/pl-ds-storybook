@@ -3,7 +3,7 @@ import { Tooltip } from './Tooltip';
 import React from 'react';
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'Design System/Tooltip',
+  title: 'Feedback/Tooltip',
   component: Tooltip,
   tags: ['autodocs'],
   parameters: {

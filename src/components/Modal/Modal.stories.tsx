@@ -3,7 +3,7 @@ import { Modal } from './Modal';
 import React from 'react';
 
 const meta: Meta<typeof Modal> = {
-  title: 'Design System/Modal',
+  title: 'Feedback/Modal',
   component: Modal,
   tags: ['autodocs'],
   parameters: {

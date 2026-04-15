@@ -41,14 +41,14 @@ const CheckIconS = () => (
 );
 
 const MinusIconM = () => (
-  <svg width="10" height="2" viewBox="0 0 10 2" fill="none">
-    <rect width="10" height="2" rx="1" fill="currentColor" />
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <rect x="3" y="7" width="10" height="2" rx="1" fill="currentColor" />
   </svg>
 );
 
 const MinusIconS = () => (
-  <svg width="8" height="2" viewBox="0 0 8 2" fill="none">
-    <rect width="8" height="2" rx="1" fill="currentColor" />
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+    <rect x="2" y="5" width="8" height="2" rx="1" fill="currentColor" />
   </svg>
 );
 

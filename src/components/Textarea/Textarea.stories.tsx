@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Textarea } from './Textarea';
 
 const meta = {
-  title: 'Design System/Textarea',
+  title: 'Inputs/Textarea',
   component: Textarea,
   parameters: {
     layout: 'centered',

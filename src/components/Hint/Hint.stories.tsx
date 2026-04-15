@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Hint } from './Hint';
 
 const meta = {
-  title: 'Design System/Hint',
+  title: 'Feedback/Hint',
   component: Hint,
   parameters: {
     layout: 'centered',

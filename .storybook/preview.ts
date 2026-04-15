@@ -3,6 +3,11 @@ import '../src/styles/tokens.css';
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ['Foundations', 'Inputs', 'Data Display', 'Feedback', 'Navigation', 'Components'],
+      },
+    },
     backgrounds: {
       default: 'light',
       values: [

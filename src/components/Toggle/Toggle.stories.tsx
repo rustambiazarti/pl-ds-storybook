@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Toggle } from './Toggle';
 
 const meta = {
-  title: 'Design System/Toggle',
+  title: 'Inputs/Toggle',
   component: Toggle,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
@@ -37,6 +37,8 @@ export const AllStates: Story = {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <Toggle label="Off" size="M" />
           <Toggle label="On" size="M" checked />
+          <Toggle label="Disabled off" size="M" disabled />
+          <Toggle label="Disabled on" size="M" disabled checked />
         </div>
       </div>
     </div>

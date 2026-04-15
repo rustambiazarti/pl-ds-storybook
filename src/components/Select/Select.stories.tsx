@@ -3,7 +3,7 @@ import { Select } from './Select';
 import React, { useState } from 'react';
 
 const meta: Meta<typeof Select> = {
-  title: 'Design System/Select',
+  title: 'Inputs/Select',
   component: Select,
   tags: ['autodocs'],
   parameters: {

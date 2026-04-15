@@ -1,0 +1,167 @@
+/* ==========================================================================
+   Typography Component — Platinumlist Design System
+   Figma source: Typography styles for WEB (EN/AR/RU/EL)
+   ========================================================================== */
+
+/* ---- Base ---- */
+.text {
+  font-family: var(--font-family-default);
+  color: var(--content-primary);
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Language font overrides ---- */
+.langRu { font-family: var(--font-family-default-ru); }
+.langAr {
+  font-family: var(--font-family-default-ar);
+  direction: rtl;
+  text-align: right;
+}
+.langEl { font-family: var(--font-family-default-el); }
+
+/* ---- Accent font ---- */
+.accent { font-family: var(--font-family-accent); text-transform: uppercase; }
+.langRu.accent { font-family: var(--font-family-accent-ru); text-transform: uppercase; }
+.langAr.accent { font-family: var(--font-family-accent-ar); }
+.langEl.accent {
+  font-family: var(--font-family-accent-el);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Title styles
+   ========================================================================== */
+
+/* Title 4xlarge — 56/60 Bold */
+.title-4xl {
+  font-size: var(--font-size-5xl);
+  line-height: var(--font-line-height-5xl);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Title 3xlarge — 48/52 Bold */
+.title-3xl {
+  font-size: var(--font-size-4xl);
+  line-height: var(--font-line-height-4xl);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Title 2xlarge — 40/44 Bold */
+.title-2xl {
+  font-size: var(--font-size-3xl);
+  line-height: var(--font-line-height-3xl);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Title xlarge — 32/40 Bold */
+.title-xl {
+  font-size: var(--font-size-2xl);
+  line-height: var(--font-line-height-2xl);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Title large — 24/32 Semibold */
+.title-lg {
+  font-size: var(--font-size-xl);
+  line-height: var(--font-line-height-xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Title large accent — 24/32 Bold accent */
+.title-lg.accent {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Title base — 20/24 Semibold */
+.title-base {
+  font-size: var(--font-size-lg);
+  line-height: var(--font-line-height-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Title small — 16/20 Semibold */
+.title-sm {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ==========================================================================
+   Body Short styles
+   ========================================================================== */
+
+/* Body large — 20/24 Regular */
+.body-short-lg {
+  font-size: var(--font-size-lg);
+  line-height: var(--font-line-height-md);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Body base — 16/20 Regular */
+.body-short-base {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-sm);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Body small — 14/18 Regular */
+.body-short-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Body small strong — 14/18 Semibold */
+.body-short-sm-strong {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Caption — 12/14 Regular */
+.body-short-caption {
+  font-size: var(--font-size-xs);
+  line-height: var(--font-line-height-2xs);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Caption strong — 12/14 Semibold */
+.body-short-caption-strong {
+  font-size: var(--font-size-xs);
+  line-height: var(--font-line-height-2xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ==========================================================================
+   Body Long styles (paragraph text, larger line-height)
+   ========================================================================== */
+
+/* Body long large — 20/28 Regular */
+.body-long-lg {
+  font-size: var(--font-size-lg);
+  line-height: var(--font-line-height-lg-long);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Body long base — 16/24 Regular */
+.body-long-base {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-md-long);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Body long small — 14/20 Regular */
+.body-long-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-sm-long);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Body long caption — 12/18 Regular */
+.body-long-caption {
+  font-size: var(--font-size-xs);
+  line-height: var(--font-line-height-xs-long);
+  font-weight: var(--font-weight-regular);
+}

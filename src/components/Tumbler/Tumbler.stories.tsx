@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Tumbler } from './Tumbler';
 
 const meta = {
-  title: 'Design System/Tumbler',
+  title: 'Inputs/Tumbler',
   component: Tumbler,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

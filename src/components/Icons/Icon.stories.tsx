@@ -6,7 +6,7 @@ import type { IconName } from './iconData';
 import styles from './Icon.module.css';
 
 const meta = {
-  title: 'Design System/Icons',
+  title: 'Foundations/Icons',
   component: Icon,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
