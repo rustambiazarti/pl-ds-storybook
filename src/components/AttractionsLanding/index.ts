@@ -1,0 +1,1 @@
+export { AttractionsLanding } from './AttractionsLanding';
